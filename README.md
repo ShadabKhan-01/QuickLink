@@ -29,7 +29,7 @@ Ensure you have the following installed:
 
 1. **Clone the Repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/ShadabKhan-01/QuickLink.git
    cd QuickLink
    ```
 2. **Install Dependencies:**
@@ -39,7 +39,7 @@ Ensure you have the following installed:
 3. **Setup Environment Variables:** Create a .env.local file in the root directory and add the following:
     ```bash
     MONGODB_URI=<your-mongodb-url>
-    NEXT_PUBLIC_HOST=http://localhost:3000
+    NEXT_PUBLIC_HOST=http://localhost:3000/
     ```
 4. **Run the Development Server:**
     ```bash

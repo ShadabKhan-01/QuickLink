@@ -1,6 +1,5 @@
 "use client"
 
-import Navbar from "@/components/Navbar";
 import { useState } from "react";
 import { FaLink } from "react-icons/fa6";
 import Link from "next/link";
@@ -42,8 +41,6 @@ export default function Home() {
 
   return (
     <>
-      <div className="main fixed top-0 -z-10 w-screen h-svh bg-gradient-to-bl from-[#f6f4f2] from-50% to-[#c7ab97] to-50%"></div>
-      <Navbar />
       <main className=" md:flex">
         <section className="w-1/2 flex justify-center items-center">
           <div className="bg-white p-10 rounded-lg shadow-md font-semibold">

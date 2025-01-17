@@ -3,12 +3,18 @@
 import { useState } from "react";
 import { FaLink } from "react-icons/fa6";
 import Link from "next/link";
+import { useUser } from "@clerk/nextjs";
 
 export default function Home() {
 
   const [url, seturl] = useState("");
   const [shortUrl, setshortUrl] = useState("");
   const [geturl, setgeturl] = useState("")
+
+  const user = useUser();
+  const userId = user.user?.id;
+  console.log(user.user);
+  console.log(userId);
 
   const sendUrl = (e) => {
     e.preventDefault();
@@ -17,7 +23,8 @@ export default function Home() {
 
     const raw = JSON.stringify({
       "url": url,
-      "shortUrl": shortUrl
+      "shortUrl": shortUrl,
+      "userId": userId
     });
 
     const requestOptions = {

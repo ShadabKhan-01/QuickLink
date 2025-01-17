@@ -14,7 +14,8 @@ export async function POST(request) {
 
     const result = await collection.insertOne({
         url:body.url,
-        shortUrl:body.shortUrl
+        shortUrl:body.shortUrl,
+        userId:body.userId
     })
 
     return Response.json({success:true,error:false,message:"Link Generated succesfully"})

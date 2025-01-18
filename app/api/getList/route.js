@@ -12,6 +12,7 @@ export async function POST(request) {
     const items = data.map((item) => ({
       url: item.url,
       shortUrl: item.shortUrl,
+      visits: item.visits
     }));
 
     return Response.json(items);

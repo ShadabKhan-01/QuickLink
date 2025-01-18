@@ -16,10 +16,10 @@ const Navbar = () => {
         <Link href={"/"}>QuickLinks</Link>
       </h1>
       <section className='flex justify-center items-center gap-4'>
-      <button className='bg-[#c7ab97] py-1 px-3 rounded text-white font-semibold'><Link href={"/profile"}>My Profile</Link></button>
+      <button className='bg-[#775941] py-1 px-3 rounded text-white font-semibold'><Link href={"/profile"}>My Profile</Link></button>
       <UserButton />
       <SignedOut>
-        <SignInButton className='bg-[#c7ab97] py-1 px-3 rounded text-white font-semibold' />
+        <SignInButton className='bg-[#775941] py-1 px-3 rounded text-white font-semibold' />
       </SignedOut>
       </section>
     </nav>

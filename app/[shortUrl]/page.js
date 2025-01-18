@@ -11,6 +11,10 @@ export default async function Page({ params }) {
 
     const doc = await collection.findOne({ shortUrl: shortUrl })
     if (doc) {
+        collection.updateOne(
+            { shortUrl: shortUrl },
+            { $inc: { visits: +1 } }
+         )
         redirect(doc.url);
     }
     else {

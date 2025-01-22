@@ -27,13 +27,6 @@ const page = () => {
     }
   };
 
-  const handleDelete = () => {
-    // Perform delete action for checked items
-    // const remainingItems = items.filter((_, index) => !checkedItems.includes(index));
-    // setCheckedItems([]);
-    // console.log('Deleted items:', checkedItems);
-  };
-
   const handleAddLabel = () => {
     // Perform add label action for checked items
     console.log('Add label to:', checkedItems);
@@ -41,10 +34,11 @@ const page = () => {
 
   useEffect(() => {
     setIsPopupVisible(checkedItems.length > 0);
+    console.log(checkedItems)
   }, [checkedItems]);
 
   const selectAll = () => {
-    setCheckedItems(list.map((_, index) => index)); // Select all indices
+    setCheckedItems(list.map((item, index) => item.shortUrl)); // Select all indices
   };
 
   const deselectAll = () => {
@@ -89,6 +83,34 @@ const page = () => {
     }
   }, [userId]);
 
+  const handleDelete = () => {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+      "shortUrl": checkedItems
+    });
+
+    const requestOptions = {
+      method: "DELETE",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    };
+
+    function fetchdata() {
+      fetch("/api/getList", requestOptions)
+        // .then(async (response) => await response.json())
+        // .then((result) => {
+        //   console.log(result);
+        //   setlist(result);
+        // })
+        // .catch((error) => console.error(error));
+    }
+
+    fetchdata();
+  };
+
   return (
     <div className={Quicksandvarible.className}>
       <section className='w-[90%] md:w-[60%] mx-auto'>
@@ -96,10 +118,10 @@ const page = () => {
         <ul className='mt-10'>
           {list.map((item, index) => (
             <li key={item.shortUrl} className='my-5 hover:bg-gray-100 transition-colors duration-300'
-              onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => !checkedItems.includes(index) && setHoveredIndex(null)}>
+              onMouseEnter={() => setHoveredIndex(item.shortUrl)} onMouseLeave={() => !checkedItems.includes(item.shortUrl) && setHoveredIndex(null)}>
               <div className={`relative left-0 transform transition-transform duration-300 
-              ${hoveredIndex === index || checkedItems.includes(index) ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}>
-                <input type="checkbox" checked={checkedItems.includes(index)} onChange={() => toggleCheck(index)} className="form-checkbox h-5 w-5 text-blue-600" />
+              ${hoveredIndex === item.shortUrl || checkedItems.includes(item.shortUrl) ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}>
+                <input type="checkbox" checked={checkedItems.includes(item.shortUrl)} onChange={() => toggleCheck(item.shortUrl)} className="form-checkbox h-5 w-5 text-blue-600" />
               </div>
               <section className='flex items-center justify-between'>
                 <div><BsGlobe className='w-6 h-6' /></div>

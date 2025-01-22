@@ -49,7 +49,7 @@ export default function Home() {
   return (
     <>
       <main className=" md:flex">
-        <section className="w-1/2 flex justify-center items-center">
+        <section className="mt-5 md:w-1/2 flex justify-center items-center">
           <div className="bg-white p-10 rounded-lg shadow-md font-semibold">
             <form onSubmit={(e) => sendUrl(e)}>
               <label className="my-2 block mx-4" htmlFor="url"><FaLink className="inline mr-2" />Enter your Long Url Here:</label>
@@ -64,7 +64,7 @@ export default function Home() {
             </>}
           </div>
         </section>
-        <section className="w-1/2">
+        <section className=" md:w-1/2 flex justify-center items-center">
           <div>
             <img src="/images/preview-women-character-teaching-vector-illustration.jpg" alt="" className="mix-blend-color-burn" width={400} height={400} />
           </div>

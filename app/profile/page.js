@@ -15,6 +15,41 @@ const Quicksandvarible = Quicksand({
 const page = () => {
 
   const [list, setlist] = useState([])
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [checkedItems, setCheckedItems] = useState([]);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+  const toggleCheck = (index) => {
+    if (checkedItems.includes(index)) {
+      setCheckedItems(checkedItems.filter((item) => item !== index));
+    } else {
+      setCheckedItems([...checkedItems, index]);
+    }
+  };
+
+  const handleDelete = () => {
+    // Perform delete action for checked items
+    // const remainingItems = items.filter((_, index) => !checkedItems.includes(index));
+    // setCheckedItems([]);
+    // console.log('Deleted items:', checkedItems);
+  };
+
+  const handleAddLabel = () => {
+    // Perform add label action for checked items
+    console.log('Add label to:', checkedItems);
+  };
+
+  useEffect(() => {
+    setIsPopupVisible(checkedItems.length > 0);
+  }, [checkedItems]);
+
+  const selectAll = () => {
+    setCheckedItems(list.map((_, index) => index)); // Select all indices
+  };
+
+  const deselectAll = () => {
+    setCheckedItems([]); // Deselect all items
+  };
 
   const user = useUser();
   const userId = user.user?.id;
@@ -56,21 +91,25 @@ const page = () => {
 
   return (
     <div className={Quicksandvarible.className}>
-      hey there
-      <section className='w-[90%] md:w-[60%] mx-auto overflow-y-auto'>
-        <h3 className={`text-center text-2xl font-extrabold text-[#474747]`}>Your Recent URLs</h3>
+      <section className='w-[90%] md:w-[60%] mx-auto'>
+        <h3 className={`mt-20 sticky top-2 bg-[#f6f4f2] pt-2 w-[70%] mx-auto rounded text-center text-2xl font-extrabold text-[#474747]`}>Your Recent URLs</h3>
         <ul className='mt-10'>
           {list.map((item, index) => (
-            <li key={item.shortUrl} className='my-5'>
+            <li key={item.shortUrl} className='my-5 hover:bg-gray-100 transition-colors duration-300'
+              onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => !checkedItems.includes(index) && setHoveredIndex(null)}>
+              <div className={`relative left-0 transform transition-transform duration-300 
+              ${hoveredIndex === index || checkedItems.includes(index) ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}>
+                <input type="checkbox" checked={checkedItems.includes(index)} onChange={() => toggleCheck(index)} className="form-checkbox h-5 w-5 text-blue-600" />
+              </div>
               <section className='flex items-center justify-between'>
                 <div><BsGlobe className='w-6 h-6' /></div>
-                <ul className='w-[70%] overflow-x-clip'>
+                <ul className='w-[65%] md:w-[70%] overflow-hidden text-ellipsis whitespace-nowrap'>
                   <li><Link href={item.url} target="_blank">{item.url}</Link></li>
                   <li><Link href={process.env.NEXT_PUBLIC_HOST + item.shortUrl} target="_blank">{item.shortUrl}</Link></li>
                 </ul>
-                <div className='flex text-white gap-2'>
-                  <div className='bg-[#775941] py-1 px-3 rounded'>{item.visits} Visits </div>
-                  <button className='bg-[#775941] py-1 px-3 rounded' onClick={() => copyData(process.env.NEXT_PUBLIC_HOST + item.shortUrl)}><IoCopy className='fill-white inline mr-2' />Copy</button>
+                <div className='md:flex text-white gap-2'>
+                  <div className='bg-[#775941] py-1 px-3 rounded'>{item.visits} Visit(s)</div>
+                  <button className='bg-[#775941] py-1 px-3 rounded' onClick={() => copyData(process.env.NEXT_PUBLIC_HOST + item.shortUrl)}><IoCopy className='fill-white hidden md:inline mr-1 md:mr-2' />Copy</button>
                 </div>
               </section>
               <div className='w-full h-[1px] bg-[#bebcbb]'></div>
@@ -78,6 +117,41 @@ const page = () => {
           ))}
         </ul>
       </section>
+      <div
+        className={`fixed bottom-0 left-0 w-full bg-gray-800 text-white p-4 flex justify-between items-center transition-transform duration-500 ${
+          isPopupVisible ? 'translate-y-0' : 'translate-y-full'
+        }`}
+      >
+        <div>
+          <p className="text-lg font-semibold">Selected Actions</p>
+        </div>
+        <div className="flex space-x-4">
+          <button
+            className="bg-green-500 px-4 py-2 rounded text-white hover:bg-green-600 transition"
+            onClick={selectAll}
+          >
+            Select All
+          </button>
+          <button
+            className="bg-yellow-500 px-4 py-2 rounded text-white hover:bg-yellow-600 transition"
+            onClick={deselectAll}
+          >
+            Deselect All
+          </button>
+          <button
+            className="bg-red-500 px-4 py-2 rounded text-white hover:bg-red-600 transition"
+            onClick={handleDelete}
+          >
+            Delete
+          </button>
+          <button
+            className="bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600 transition"
+            onClick={handleAddLabel}
+          >
+            Add Label
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

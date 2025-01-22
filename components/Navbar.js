@@ -2,15 +2,40 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { SignedOut, SignIn, SignInButton, UserButton } from '@clerk/nextjs'
 
 const Navbar = () => {
 
   const [isLogin, setIsLogin] = useState(false)
 
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY && currentScrollY > 70) {
+      setIsVisible(false); // Hide navbar when scrolling down
+    } else {
+      setIsVisible(true); // Show navbar when scrolling up
+    }
+
+    setLastScrollY(currentScrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
+
   return (
-    <nav className='sticky top-0 w-full flex justify-between px-5 bg-[#f6f4f2] h-16 items-center shadow-md'
+    <nav className={`fixed left-0 top-0 w-full flex justify-between px-5 bg-[#f6f4f2] h-16 items-center shadow-md transition-transform duration-300 z-50 ${
+        isVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}
     >
       <h1>
         <Link href={"/"}>QuickLinks</Link>

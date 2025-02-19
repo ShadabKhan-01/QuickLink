@@ -83,33 +83,31 @@ const page = () => {
     }
   }, [userId]);
 
-  const handleDelete = () => {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const raw = JSON.stringify({
-      "shortUrl": checkedItems
-    });
-
-    const requestOptions = {
-      method: "DELETE",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow"
-    };
-
-    function fetchdata() {
-      fetch("/api/getList", requestOptions)
-        // .then(async (response) => await response.json())
-        // .then((result) => {
-        //   console.log(result);
-        //   setlist(result);
-        // })
-        // .catch((error) => console.error(error));
+  const handleDelete = async () => {
+    if (checkedItems.length === 0) return; // No items to delete
+  
+    try {
+      const response = await fetch("/api/getList", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ shortUrl: checkedItems, userId }),
+      });
+  
+      if (!response.ok) {
+        console.error("Failed to delete items");
+        return;
+      }
+  
+      // Remove deleted items from state immediately
+      setlist((prevList) => prevList.filter(item => !checkedItems.includes(item.shortUrl)));
+  
+      // Clear selection
+      deselectAll();
+    } catch (error) {
+      console.error("Error deleting items:", error);
     }
-
-    fetchdata();
   };
+  
 
   return (
     <div className={Quicksandvarible.className}>
@@ -140,9 +138,8 @@ const page = () => {
         </ul>
       </section>
       <div
-        className={`fixed bottom-0 left-0 w-full bg-gray-800 text-white p-4 flex justify-between items-center transition-transform duration-500 ${
-          isPopupVisible ? 'translate-y-0' : 'translate-y-full'
-        }`}
+        className={`fixed bottom-0 left-0 w-full bg-gray-800 text-white p-4 flex justify-between items-center transition-transform duration-500 ${isPopupVisible ? 'translate-y-0' : 'translate-y-full'
+          }`}
       >
         <div>
           <p className="text-lg font-semibold">Selected Actions</p>

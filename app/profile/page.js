@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import LabelFilter from '@/components/LabelFilter'
 import { Quicksand } from 'next/font/google'
 import { useUser } from '@clerk/nextjs'
 import { useEffect, useState } from 'react'
@@ -111,6 +112,7 @@ const page = () => {
 
   return (
     <div className={Quicksandvarible.className}>
+      <LabelFilter />
       <section className='w-[90%] md:w-[60%] mx-auto'>
         <h3 className={`mt-20 sticky top-2 bg-[#f6f4f2] pt-2 w-[70%] mx-auto rounded text-center text-2xl font-extrabold text-[#474747]`}>Your Recent URLs</h3>
         <ul className='mt-10'>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaLink } from "react-icons/fa6";
 import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Home() {
 
@@ -15,6 +16,8 @@ export default function Home() {
   const userId = user.user?.id;
   console.log(user.user);
   console.log(userId);
+
+  const notify = (message) => toast(message);
 
   const sendUrl = (e) => {
     e.preventDefault();
@@ -38,7 +41,7 @@ export default function Home() {
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
-        alert(result.message);
+        notify("URL Generated !!")
         setshortUrl("");
         seturl("");
         setgeturl(process.env.NEXT_PUBLIC_HOST + shortUrl);
@@ -48,6 +51,7 @@ export default function Home() {
 
   return (
     <>
+    <ToastContainer />
       <main className=" md:flex">
         <section className="mt-5 md:w-1/2 flex justify-center items-center">
           <div className="bg-white p-10 rounded-lg shadow-md font-semibold">

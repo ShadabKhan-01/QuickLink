@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import LabelFilter from "@/components/LabelFilter";
+import { ToastContainer, toast } from 'react-toastify';
 import { Quicksand } from "next/font/google";
 import { useUser } from "@clerk/nextjs";
 import { BsGlobe } from "react-icons/bs";
@@ -24,6 +25,8 @@ const Page = () => {
   const user = useUser();
   const userId = user.user?.id;
 
+  const notify = (message) => toast.success(message);
+
   const toggleCheck = (index) => {
     if (checkedItems.includes(index)) {
       setCheckedItems(checkedItems.filter((item) => item !== index));
@@ -46,6 +49,7 @@ const Page = () => {
 
   const copyData = (data) => {
     navigator.clipboard.writeText(data);
+    notify("URL Copied !!")
   };
 
   const handleLabelClick = (label) => {
@@ -69,15 +73,8 @@ const Page = () => {
         return;
       }
 
-      // Update local state after successful label update
-      // setlist((prevList) =>
-      //   prevList.map((item) =>
-      //     checkedItems.includes(item.shortUrl) ? { ...item, label } : item
-      //   )
-      // );
-
-      // Clear selection after updating labels
       deselectAll();
+      notify("Label Added !!")
 
       console.log("Labels updated successfully");
     } catch (error) {
@@ -127,6 +124,7 @@ const Page = () => {
 
       setList((prevList) => prevList.filter((item) => !checkedItems.includes(item.shortUrl)));
       deselectAll();
+      notify("Item Deleted !!")
     } catch (error) {
       console.error("Error deleting items:", error);
     }
@@ -134,10 +132,11 @@ const Page = () => {
 
   return (
     <div className={Quicksandvarible.className}>
+      <ToastContainer />
       {!isLoading && <LabelFilter selectedLabel={selectedLabel} setSelectedLabel={setSelectedLabel} />}
       <section className="w-[90%] md:w-[60%] mx-auto">
         <h3 className="mt-20 sticky top-2 bg-[#f6f4f2] pt-2 w-[70%] mx-auto rounded text-center text-2xl font-extrabold text-[#474747]">
-          Your Recent URLs
+          {`${selectedLabel} URLs`}
         </h3>
 
         {/* ✅ Show Skeleton Loader when data is loading */}

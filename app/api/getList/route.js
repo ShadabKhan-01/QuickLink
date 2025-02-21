@@ -6,8 +6,13 @@ const db = client.db("quicklink");
 export async function POST(request) {
     const body = await request.json();
     const collection = db.collection("URL");
-
-    const data = await collection.find({userId:body.userId}).toArray();
+    let data = null
+    if (body.label === "All") {
+      data = await collection.find({userId:body.userId}).toArray();
+    }
+    else {
+      data = await collection.find({userId:body.userId,label:body.label}).toArray();
+    }
 
     // Convert MongoDB ObjectId to string for the client
     const items = data.map((item) => ({

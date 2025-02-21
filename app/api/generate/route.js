@@ -18,7 +18,8 @@ export async function POST(request) {
         url:body.url,
         shortUrl:body.shortUrl,
         userId:body.userId,
-        visits:visits
+        visits:visits,
+        label:"All"
     })
 
     return Response.json({success:true,error:false,message:"Link Generated succesfully"})

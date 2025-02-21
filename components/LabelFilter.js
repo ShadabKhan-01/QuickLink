@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const LabelFilter = () => {
+const LabelFilter = ({ selectedLabel, setSelectedLabel }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -29,9 +29,9 @@ const LabelFilter = () => {
       `}
     >
       <div className="bg-white shadow-lg rounded-lg px-6 py-2 flex space-x-4">
-        <button className="px-4 py-2 bg-blue-500 text-white rounded-lg">All</button>
-        <button className="px-4 py-2 bg-gray-300 text-black rounded-lg">Favorites</button>
-        <button className="px-4 py-2 bg-gray-300 text-black rounded-lg">Recent</button>
+      <button className={`px-4 py-2 rounded ${selectedLabel === "All" ? "bg-blue-500 text-white" : "bg-gray-300 text-black"}`} onClick={() => setSelectedLabel("All")}>All</button>
+      <button className={`px-4 py-2 rounded ${selectedLabel === "Favorites" ? "bg-blue-500 text-white" : "bg-gray-300 text-black"}`} onClick={() => setSelectedLabel("Favorites")}>Favorites</button>
+      <button className={`px-4 py-2 rounded ${selectedLabel === "Work" ? "bg-blue-500 text-white" : "bg-gray-300 text-black"}`} onClick={() => setSelectedLabel("Work")}>Work</button>
       </div>
     </div>
   );

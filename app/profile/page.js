@@ -58,9 +58,7 @@ const Page = () => {
   };
 
   const editLabel = async (label) => {
-    console.log(label)
     if (checkedItems.length === 0) return; // No items selected
-    console.log(checkedItems)
     try {
       const response = await fetch("/api/updateLabel", {
         method: "PUT",

@@ -14,8 +14,8 @@ export default function Home() {
 
   const user = useUser();
   const userId = user.user?.id;
-  console.log(user.user);
-  console.log(userId);
+  // console.log(user.user);
+  // console.log(userId);
 
   const notify = (message) => toast(message);
 
@@ -40,7 +40,7 @@ export default function Home() {
     fetch("/api/generate", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         notify("URL Generated !!")
         setshortUrl("");
         seturl("");
@@ -52,7 +52,7 @@ export default function Home() {
   return (
     <>
     <ToastContainer />
-      <main className=" md:flex">
+      <main className="md:h-screen md:flex items-center">
         <section className="mt-5 md:w-1/2 flex justify-center items-center">
           <div className="bg-white p-10 rounded-lg shadow-md font-semibold">
             <form onSubmit={(e) => sendUrl(e)}>

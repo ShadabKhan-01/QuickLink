@@ -1,18 +1,37 @@
-# QuickLink - Get URL of Your Type
+# QuickLink - Smart URL Management  
 
-QuickLink is a web application that allows users to generate customized URLs for their desired links. It is built using **Next.js** and **MongoDB** as the database.
+QuickLink is a **Next.js-based** web application designed to **organize, categorize, and manage URLs** efficiently. With **real-time filtering, bulk actions, and label management**, it enhances the user experience for seamless link organization.  
 
 ---
 
-## Features
-- Create customized URLs for your links.
-- Automatically redirect to the original URL when visiting the customized URL.
-- Simple and intuitive UI for creating customized links.
+## 🚀 Features  
+- ✅Create customized URLs for your links.
+- ✅ Automatically redirect to the original URL when visiting the customized URL.
+- ✅ **Save & Manage URLs** – Store and retrieve links with ease.  
+- ✅ **Custom Labeling System** – Categorize URLs as **Favorites**, **Work**, or **Custom Labels** (upcoming).  
+- ✅ **Dynamic Filtering** – Instantly switch between **All URLs** or **Favorite URLs**.  
+- ✅ **Bulk Actions Support** – Select multiple items for **quick editing or deletion**.  
+- ✅ **Interactive UI & UX** – Minimal, smooth, and **intuitive** interface.  
+- ✅ **Real-time Database Updates** – Seamlessly integrates with **MongoDB**.  
+- ✅ **Authentication with Clerk** – Secure and personalized access for users.  
+- ✅ **Skeleton Loaders** – Enhances UX with smooth **loading animations**.  
+- ✅ **Clipboard Copy Feature** – Instantly copy links with a single click.  
+- ✅ **Toast Notifications** – Provides instant feedback with **Toastify**.  
 
-### Future Enhancements
-- Add user authentication for managing links.
-- Track the number of visits for each customized URL.
-- Organize and categorize customized URLs.
+---
+## 🛠️ Tech Stack  
+
+- **Frontend**: Next.js, React, Tailwind CSS  
+- **Backend**: Next.js API Routes, MongoDB  
+- **Authentication**: Clerk  
+- **Notifications**: React-Toastify  
+
+---
+## 📌 Future Enhancements  
+
+🔹 **Custom Labels** – Users will be able to **create & apply their own labels** for better organization.    
+🔹 **Advanced Search & Filtering** – Enhance URL retrieval with **keyword-based search**.  
+🔹 **User Dashboard** – Personalized analytics for **better insights on saved links**.  
 
 ---
 
@@ -48,22 +67,21 @@ Ensure you have the following installed:
 5. **Access the App:** Open your browser and go to http://localhost:3000.
 ---
 
-## Usage
-1. On the homepage, input:
-    - **Original URL:** The URL you want to create a customized link for.
-    - **Customized URL:** Your desired custom string.
-2. If the customized URL does not already exist, the application will generate a new URL with the prefix:
-    ```vbnet
-    http://localhost:3000/<custom-string>
-    ```
-3. Visiting the generated URL will redirect you to the original URL.
----
-## Technologies Used
-- **Next.js:** Framework for building the app.
-- **MongoDB:** Database for storing URLs and associated data.
+## 💡 How to Use
+### 1. Add URLs:
+
+- Enter the original URL and a custom label.
+- The system automatically generates a shortened, categorized URL.
+### 2. Filter & Manage:
+
+- Use the Favorite or All filter to organize links.
+- Edit, delete, or bulk-select items for quick actions.
+### 3. Copy & Share:
+
+- Easily copy any saved URL with a single click.
 ---
 
-## Contributing
+## 🤝Contributing
 We welcome contributions to enhance QuickLink. Here's how you can help:
 1. Fork the repository.
 2. Create a new branch for your feature (`git checkout -b feature-name`).
@@ -72,8 +90,8 @@ We welcome contributions to enhance QuickLink. Here's how you can help:
 5. Open a Pull Request.
 
 
-## Contact
+## 📞Contact
 For any inquiries or support, feel free to reach out:
 
-Email: iam.shadab.khan.1001@gmail.com <br>
-GitHub: [ShadabKhan-01](https://github.com/ShadabKhan-01)
+📧Email: iam.shadab.khan.1001@gmail.com <br>
+💻 GitHub: [ShadabKhan-01](https://github.com/ShadabKhan-01)

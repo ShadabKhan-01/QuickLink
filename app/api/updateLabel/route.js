@@ -12,9 +12,6 @@ export async function PUT(request) {
         { shortUrl: { $in: body.shortUrl }, userId: body.userId },
         { $set: { label: body.label } }
     );
-    console.log(body.label)
-    console.log(body.shortUrl)
-    console.log(body.userId)
 
     return Response.json({ success: true, message: "Labels updated" });
 

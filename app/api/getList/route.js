@@ -41,7 +41,7 @@ export async function DELETE(request) {
       visits: item.visits
     }));
 
-    console.log(body.shortUrl);
+    // console.log(body.shortUrl);
     
     return Response.json(items);
 

@@ -9,15 +9,11 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
+// Fixing ESLint issue by explicitly defining a parser
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals"),
   {
-    languageOptions: {
-      parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "module",
-      },
-    },
+    parser: "@babel/eslint-parser",
+    extends: ["next/core-web-vitals"],
   },
 ];
 

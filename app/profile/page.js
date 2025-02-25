@@ -21,6 +21,8 @@ const Page = () => {
   const [selectedLabel, setSelectedLabel] = useState("All"); // Default: Show all URLs
   const [isLoading, setIsLoading] = useState(true); // Track loading state
   const [showLabelOptions, setShowLabelOptions] = useState(false); // State to show label options
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const user = useUser();
   const userId = user.user?.id;
@@ -34,6 +36,10 @@ const Page = () => {
       setCheckedItems([...checkedItems, index]);
     }
   };
+
+  const filteredItems = list.filter(item =>
+    item.shortUrl.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   useEffect(() => {
     setIsPopupVisible(checkedItems.length > 0);
@@ -133,9 +139,19 @@ const Page = () => {
       <ToastContainer />
       {!isLoading && <LabelFilter selectedLabel={selectedLabel} setSelectedLabel={setSelectedLabel} />}
       <section className="w-[90%] md:w-[60%] mx-auto">
-        <h3 className="mt-20 sticky top-2 bg-[#f6f4f2] pt-2 w-[70%] mx-auto rounded text-center text-2xl font-extrabold text-[#474747]">
-          {`${selectedLabel} URLs`}
-        </h3>
+        <div className="mt-20 sticky top-2 pt-2 w-[70%] mx-auto rounded text-center">
+          <h3 className="bg-[#f6f4f2] text-2xl font-extrabold text-[#474747]">
+            {`${selectedLabel} URLs`}
+          </h3>
+
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full p-2 mt-2 border border-gray-300 rounded-md"
+          />
+        </div>
 
         {/* ✅ Show Skeleton Loader when data is loading */}
         {isLoading ? (
@@ -155,7 +171,7 @@ const Page = () => {
               <li className="text-center text-lg text-gray-400">No URLs found</li>
             ) : (
 
-              (list.map((item, index) => (
+              (filteredItems.map((item, index) => (
                 <li
                   key={item.shortUrl}
                   className="my-5 hover:bg-gray-100 transition-colors duration-300"

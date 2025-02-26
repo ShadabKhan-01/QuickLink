@@ -25,7 +25,7 @@ const LabelFilter = ({ selectedLabel, setSelectedLabel }) => {
   return (
     <div
       className={`fixed left-1/2 transform -translate-x-1/2 transition-transform duration-300 ease-in-out 
-        ${isVisible ? 'translate-y-[60vh]' : 'translate-y-[100vh]'}
+        ${isVisible ? 'translate-y-[67dvh] md:translate-y-[60vh] ': 'translate-y-[100vh]'}
       `}
     >
       <div className="bg-white shadow-lg rounded-lg px-6 py-2 flex space-x-4">

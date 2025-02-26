@@ -65,7 +65,7 @@ export default function Home() {
   return (
     <>
     <ToastContainer />
-      <main className="md:h-screen md:flex items-center">
+      <main className="pt-16 md:pt-0 md:h-screen md:flex items-center">
         <section className="mt-5 md:w-1/2 flex justify-center items-center">
           <div className="bg-white p-10 rounded-lg shadow-md font-semibold">
             <form onSubmit={(e) => handleSubmit(e)}>

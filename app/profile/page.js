@@ -22,7 +22,6 @@ const Page = () => {
   const [isLoading, setIsLoading] = useState(true); // Track loading state
   const [showLabelOptions, setShowLabelOptions] = useState(false); // State to show label options
   const [searchTerm, setSearchTerm] = useState('');
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const user = useUser();
   const userId = user.user?.id;
@@ -166,7 +165,7 @@ const Page = () => {
               ))}
           </ul>
         ) : (
-          <ul className="mt-10">
+          <ul>
             {list.length === 0 ? (
               <li className="text-center text-lg text-gray-400">No URLs found</li>
             ) : (
@@ -208,10 +207,10 @@ const Page = () => {
                     <div className="md:flex text-white gap-2">
                       <div className="bg-[#775941] py-1 px-3 rounded">{item.visits} Visit(s)</div>
                       <button
-                        className="bg-[#775941] py-1 px-3 rounded"
+                        className="bg-[#775941] py-1 px-3 rounded mt-1 md:mt-0"
                         onClick={() => copyData(process.env.NEXT_PUBLIC_HOST + item.shortUrl)}
                       >
-                        <IoCopy className="fill-white hidden md:inline mr-1 md:mr-2" />
+                        <IoCopy className="fill-white inline mr-1 md:mr-2" />
                         Copy
                       </button>
                     </div>
@@ -228,29 +227,29 @@ const Page = () => {
         className={`fixed bottom-0 left-0 w-full bg-gray-800 text-white p-4 flex justify-between items-center transition-transform duration-500 ${isPopupVisible ? "translate-y-0" : "translate-y-full"}`}
       >
         <div>
-          <p className="text-lg font-semibold">Selected Actions</p>
+          <p className="md:text-lg font-semibold">Selected Actions</p>
         </div>
-        <div className="flex space-x-4">
+        <div className="flex flex-wrap md:space-x-4 justify-evenly">
           <button
-            className="bg-green-500 px-4 py-2 rounded text-white hover:bg-green-600 transition"
+            className="bg-green-500 px-4 py-1 md:py-2 rounded text-white hover:bg-green-600 transition"
             onClick={selectAll}
           >
             Select All
           </button>
           <button
-            className="bg-yellow-500 px-4 py-2 rounded text-white hover:bg-yellow-600 transition"
+            className="bg-yellow-500 px-4 py-1 md:py-2 rounded text-white hover:bg-yellow-600 transition"
             onClick={deselectAll}
           >
             Deselect All
           </button>
           <button
-            className="bg-red-500 px-4 py-2 rounded text-white hover:bg-red-600 transition"
+            className="bg-red-500 px-6 mt-1 md:mt-0 py-1 md:py-2 rounded text-white hover:bg-red-600 transition"
             onClick={handleDelete}
           >
             Delete
           </button>
           <button
-            className="bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600 transition"
+            className="bg-blue-500 px-5 mt-1 md:mt-0 py-1 md:py-2 rounded text-white hover:bg-blue-600 transition"
             onClick={() => setShowLabelOptions(!showLabelOptions)}
           >
             Add Label

@@ -17,10 +17,23 @@ export default function Home() {
   // console.log(user.user);
   // console.log(userId);
 
-  const notify = (message) => toast(message);
+  const notify = (message) => toast.success(message);
 
-  const sendUrl = (e) => {
+  const isValidShortUrl = (url) => {
+    const regex = /^[a-zA-Z0-9._-]+$/;
+    return regex.test(url);
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
+    if (!isValidShortUrl(shortUrl)) {
+      toast.error("Invalid URL: Only letters, numbers, hyphens, underscores, and dots are allowed.");
+      return;
+    }
+    sendUrl();
+  };
+
+  const sendUrl = () => {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -55,7 +68,7 @@ export default function Home() {
       <main className="md:h-screen md:flex items-center">
         <section className="mt-5 md:w-1/2 flex justify-center items-center">
           <div className="bg-white p-10 rounded-lg shadow-md font-semibold">
-            <form onSubmit={(e) => sendUrl(e)}>
+            <form onSubmit={(e) => handleSubmit(e)}>
               <label className="my-2 block mx-4" htmlFor="url"><FaLink className="inline mr-2" />Enter your Long Url Here:</label>
               <input className="my-2 block border w-full h-[35px] rounded-md" type="url" name="url" id="url" value={url} onChange={(e) => { seturl(e.target.value) }} required />
               <label className="my-2 block mx-4" htmlFor="shortUrl"><FaLink className="inline mr-2" />Customize your Link:</label>
